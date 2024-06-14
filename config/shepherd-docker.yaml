@@ -1,0 +1,14 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:base64", "base64")
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: shepherd-docker
+  annotations:
+    secretgen.carvel.dev/image-pull-secret: ""
+    tekton.dev/docker-0: #@ data.values.imported.tanzusupplychain.ocistore.server + "/" + data.values.imported.tanzusupplychain.ocistore.repository
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: e30K
